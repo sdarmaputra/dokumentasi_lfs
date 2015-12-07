@@ -20,6 +20,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		// $this->load->view('welcome_message');
+		$this->load->model('M_User');
+		echo json_encode($this->M_User->auth('agus',sha1('anginbiru')));
 	}
 }
