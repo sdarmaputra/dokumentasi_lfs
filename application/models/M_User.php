@@ -30,10 +30,15 @@ class M_User extends CI_Model {
         $query = $this->db->insert('dokumentasi', $data);
         return $query;
     }
-    function insertMahasiswa($data)
+    function insertDataMahasiswa($data)
     {
         $query = $this->db->insert('mahasiswa', $data);
         return $query;
+    }
+    function getDataMahasiswa($iduser)
+    {
+        $query = $this->db->get_where('mahasiswa', array('user_iduser' => $iduser));
+        return $query->result();
     }
 
 }

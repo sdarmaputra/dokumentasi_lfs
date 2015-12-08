@@ -36,19 +36,6 @@ class C_User extends CI_Controller {
 		$data=$this->M_User->getDataDokumentasi($this->session->iduser);
 		echo json_encode($data);
 	}
-	public function insertMahasiswa()
-	{
-		$nrp=$this->input->post('nrp');
-		$nama=$this->input->post('nama');
-		$iduser=$this->session->iduser;
-		$data = array(
-	        'nama' => $nama,
-	        'user_iduser' => $iduser,
-	        'nrp' => $nrp
-		);
-		print_r($data);
-		$this->M_User->insertMahasiswa($data);
-	}
 	public function insertDataDokumentasi()
 	{
 		$judul=$this->input->post('judul');
@@ -65,5 +52,24 @@ class C_User extends CI_Controller {
 		print_r($data);
 		$this->M_User->insertDataDokumentasi($data);
 	}
+	public function insertDataMahasiswa()
+	{
+		$nrp=$this->input->post('nrp');
+		$nama=$this->input->post('nama');
+		$iduser=$this->session->iduser;
+		$data = array(
+	        'nama' => $nama,
+	        'user_iduser' => $iduser,
+	        'nrp' => $nrp
+		);
+		print_r($data);
+		$this->M_User->insertDataMahasiswa($data);
+	}
+	public function getDataMahasiswa()
+	{
+		$data=$this->M_User->getDataMahasiswa($this->session->iduser);
+		echo json_encode($data);
+	}
+	
 	
 }
