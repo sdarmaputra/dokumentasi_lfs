@@ -13,6 +13,9 @@ class C_User extends CI_Controller {
     
 	public function index()
 	{
+		$data['page_title'] = 'Dasbor';
+		$page = $this->input->get('page');
+		$this->session->set_flashdata('section', $page);
 		if(!empty($this->session->userdata('iduser')))
 		{
 			$data['need_table'] = TRUE;
@@ -23,7 +26,9 @@ class C_User extends CI_Controller {
 	public function getDataDokumentasi()
 	{
 		$data=$this->M_User->getDataDokumentasi($this->session->iduser);
-		echo json_encode($data);
+		$output = [];
+		$output['data'] = $data;
+		echo json_encode($output);
 	}
 	public function insertDataDokumentasi()
 	{
@@ -31,15 +36,23 @@ class C_User extends CI_Controller {
 		$keterangan=$this->input->post('keterangan');
 		$nrp=$this->input->post('nrp');
 		$iduser=$this->session->iduser;
-		$data = array(
-	        'waktu' => date('Y-m-d H:i:s'),
-	        'judul' => $judul,
-	        'keterangan' => $keterangan,
-	        'user_iduser' => $iduser,
-	        'nrp' => $nrp
-		);
-		print_r($data);
-		$this->M_User->insertDataDokumentasi($data);
+		$nrp_count = sizeof($nrp);
+		for ($i = 0; $i < $nrp_count; $i++) {
+			$data = array(
+		        'waktu' => date('Y-m-d H:i:s'),
+		        'judul' => $judul,
+		        'keterangan' => $keterangan,
+		        'user_iduser' => $iduser,
+		        'nrp' => $nrp[$i]
+			);
+			$this->M_User->insertDataDokumentasi($data);	
+		}
+		redirect(site_url('user?page=dokumentasi'));
+	}
+	public function deleteDataDokumentasi($id)
+	{
+		$this->M_User->deleteDataDokumentasi($id);
+		redirect(site_url('user?page=dokumentasi'));
 	}
 	public function insertDataMahasiswa()
 	{
@@ -51,14 +64,17 @@ class C_User extends CI_Controller {
 	        'user_iduser' => $iduser,
 	        'nrp' => $nrp
 		);
-		print_r($data);
 		$this->M_User->insertDataMahasiswa($data);
+		redirect(site_url('user?page=anggota_tim'));
 	}
 	public function getDataMahasiswa()
 	{
 		$data=$this->M_User->getDataMahasiswa($this->session->iduser);
 		echo json_encode($data);
 	}
-	
-	
+	public function deleteDataMahasiswa($id)
+	{
+		$this->M_User->deleteDataMahasiswa($id);
+		redirect(site_url('user?page=anggota_tim'));
+	}
 }

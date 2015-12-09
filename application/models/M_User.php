@@ -30,6 +30,12 @@ class M_User extends CI_Model {
         $query = $this->db->insert('dokumentasi', $data);
         return $query;
     }
+    function deleteDataDokumentasi($idDokumentasi)
+    {
+        $this->db->where('idDokumentasi', $idDokumentasi);
+        $query = $this->db->delete('dokumentasi');
+        return $query;   
+    }
     function insertDataMahasiswa($data)
     {
         $query = $this->db->insert('mahasiswa', $data);
@@ -39,6 +45,12 @@ class M_User extends CI_Model {
     {
         $query = $this->db->get_where('mahasiswa', array('user_iduser' => $iduser));
         return $query->result();
+    }
+    function deleteDataMahasiswa($nrp)
+    {
+        $this->db->where('nrp', $nrp);
+        $query = $this->db->delete('mahasiswa');
+        return $query;   
     }
 
 }

@@ -1,5 +1,17 @@
+body {
+	background: #FAFAFA !important;
+}
+
 .padding-top-3 {
 	padding-top: 3em !important;
+}
+
+.padding-top-5 {
+	padding-top: 5em !important;
+}
+
+.padding-bottom-3 {
+	padding-bottom: 3em !important;
 }
 
 .hidden-element {

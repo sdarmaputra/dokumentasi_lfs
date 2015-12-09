@@ -3,10 +3,11 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Waktu</th>
+                <th style="width:15%;">Waktu</th>
                 <th>Judul</th>
                 <th>Penanggung Jawab</th>
                 <th>Keterangan</th>
+                <th style="width:5%;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -27,14 +28,14 @@
             Tambah Dokumentasi
         </div>
         <div class="content">
-            <form class="ui form" method="POST" action="#">
+            <form class="ui form" method="POST" action="<?php echo site_url('user/insertDataDokumentasi'); ?>">
                 <div class="field">
                     <label>Judul</label>
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="judul" placeholder="Judul">
                 </div>
                 <div class="field">
                     <label>Penanggung Jawab</label>
-                    <select id="daftar_anggota_tim" multiple="" class="ui search dropdown" name="nrp" placeholder="Penanggung Jawab">
+                    <select id="daftar_anggota_tim" multiple="" class="ui search dropdown" name="nrp[]" placeholder="Penanggung Jawab">
                     </select>
                 </div>
                 <div class="field">
@@ -69,6 +70,7 @@
                 <th style="width:5%;">No.</th>
                 <th style="width:20%;">NRP</th>
                 <th>Nama</th>
+                <th style="width:5%;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -99,11 +101,28 @@
 
 <script>
     $(document).ready( function () {
-        $('#tabel_dokumentasi').DataTable();
+        var table = $('#tabel_dokumentasi').DataTable({
+            "ajax": "<?php echo site_url('user/getDataDokumentasi'); ?>",
+            "columns": [
+                { "data": "idDokumentasi", "visible": false },
+                { "data": "waktu" },
+                { "data": "judul" },
+                { "data": "nrp" },
+                { "data": "keterangan" },
+                { "data": null, "defaultContent": '<button class="ui red icon button" title="Hapus Dokumentasi"><i class="ui trash icon"></i></button>' }
+            ]
+        });
+
+        $('#tabel_dokumentasi tbody').on('click','button', function() {
+            var data = table.row( $(this).parents('tr') ).data();
+            var url = "<?php echo site_url('user/deleteDataDokumentasi'); ?>/" + data['idDokumentasi'];
+            $(location).attr('href',url);
+        })
+
         $.get( "<?php echo site_url('user/getDataMahasiswa'); ?>", function( data ) {
           var mahasiswa = $.parseJSON(data);
           for (i = 0; i < mahasiswa.length; i++) {
-            $('#tabel_anggota_tim > tbody:last-child').append('<tr><td>' + ( i + 1 ) + '</td><td>' + mahasiswa[i].nrp + '</td><td>' + mahasiswa[i].nama + '</td></tr>');  
+            $('#tabel_anggota_tim > tbody:last-child').append('<tr><td>' + ( i + 1 ) + '</td><td>' + mahasiswa[i].nrp + '</td><td>' + mahasiswa[i].nama + '</td><td><a class="ui red icon button" title="Hapus Anggota" href="<?php echo site_url("user/deleteDataMahasiswa/'+mahasiswa[i].nrp+'"); ?>"><i class="ui trash icon"></i></a></td></tr>');  
             $('#daftar_anggota_tim')
              .append($("<option></option>")
              .attr("value",mahasiswa[i].nrp)
@@ -112,8 +131,12 @@
           
           console.log(mahasiswa[0].nama);
         });
+        $('select.dropdown').dropdown();        
 
-        $('select.dropdown').dropdown();
+        <?php 
+            if ($this->session->flashdata('section') == 'anggota_tim') echo "navigateDashboard('dokumentasi_menu', 'dokumentasi', 'tabel_anggota_tim_menu', 'anggota_tim');";
+            else if ($this->session->flashdata('section') == 'dokumentasi') echo "navigateDashboard('tabel_anggota_tim_menu', 'anggota_tim', 'dokumentasi_menu', 'dokumentasi');";
+        ?>
     });
 
     function tambahDokumentasi() {

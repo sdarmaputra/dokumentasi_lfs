@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/dokumentasi_lfs';
+$config['base_url'] = 'http://10.151.36.30/dokumentasi_lfs';
 $config['site_name'] = 'Dokumentasi LFS';
 
 /*
