@@ -34,7 +34,7 @@
                 </div>
                 <div class="field">
                     <label>Penanggung Jawab</label>
-                    <select id="daftar_anggota_tim" multiple="" class="ui dropdown" name="nrp" placeholder="Penanggung Jawab">
+                    <select id="daftar_anggota_tim" multiple="" class="ui search dropdown" name="nrp" placeholder="Penanggung Jawab">
                     </select>
                 </div>
                 <div class="field">
