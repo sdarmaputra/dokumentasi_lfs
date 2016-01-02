@@ -59,3 +59,6 @@ $route['auth/(:any)'] = 'C_Auth/$1';
 $route['user'] = 'C_User';
 $route['user/(:any)'] = 'C_User/$1';
 $route['user/(:any)/(:any)'] = 'C_User/$1/$2';
+$route['asisten'] = 'C_Asisten';
+$route['asisten/(:any)'] = 'C_Asisten/$1';
+$route['asisten/(:any)/(:any)'] = 'C_Asisten/$1/$2';

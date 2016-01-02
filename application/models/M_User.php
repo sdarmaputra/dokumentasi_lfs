@@ -52,5 +52,28 @@ class M_User extends CI_Model {
         $query = $this->db->delete('mahasiswa');
         return $query;   
     }
+    function getDaftarKelas() {
+        $this->db->select('kelas');
+        $this->db->group_by('kelas');
+        $query = $this->db->get('user');
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else return false;
+    }
+
+    function getUserByKelas($kelas) {
+        $this->db->select('iduser, username');
+        $query = $this->db->get_where('user', array('kelas' => $kelas));
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else return false;
+    }
+    function getById($iduser) {
+        $this->db->limit(1);
+        $query = $this->db->get_where('user', array('iduser' => $iduser));
+        if ($query) {
+            return $query->row_array();
+        }
+    }
 
 }

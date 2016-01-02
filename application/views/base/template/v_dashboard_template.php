@@ -1,3 +1,6 @@
+<?php
+	$role = explode('_', $this->session->userdata('kelas'));
+?>
 <html>
 	<head>
 		<title>
@@ -15,8 +18,13 @@
 			</div>
 			<div class="padding-top-3">
 				<div class="ui secondary large pointing red menu">
-					<a id="dokumentasi_menu" class="item active" href="<?php echo site_url('user?page=dokumentasi'); ?>"><i class="file text outline icon"></i> Dokumentasi</a>
-					<a id="tabel_anggota_tim_menu" class="item" href="<?php echo site_url('user?page=anggota_tim'); ?>"><i class="users icon"></i> Anggota Tim</a>
+					<?php if ($role[0] == 'special') {?>
+						<a id="dokumentasi_menu" class="item active" href="<?php echo site_url($role[1].'?page=dokumentasi'); ?>"><i class="file text outline icon"></i> Dokumentasi</a>
+						<a id="tabel_anggota_tim_menu" class="item" href="<?php echo site_url($role[1].'?page=anggota_tim'); ?>"><i class="users icon"></i> Anggota Tim</a>
+					<?php } else {?>
+						<a id="dokumentasi_menu" class="item active" href="<?php echo site_url('user?page=dokumentasi'); ?>"><i class="file text outline icon"></i> Dokumentasi</a>
+						<a id="tabel_anggota_tim_menu" class="item" href="<?php echo site_url('user?page=anggota_tim'); ?>"><i class="users icon"></i> Anggota Tim</a>
+					<?php } ?>
 					<div class="right menu">
 						<a class="ui item" href="<?php echo site_url('auth/logout'); ?>"><i class="sign out icon"></i> Logout </a>
 					</div>
