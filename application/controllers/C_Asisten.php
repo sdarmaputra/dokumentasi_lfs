@@ -28,7 +28,8 @@ class C_Asisten extends CI_Controller {
 		if(!empty($this->session->userdata('iduser')))
 		{
 			$data['need_table'] = TRUE;
-			$data['daftar_kelas'] = $this->M_User->getDaftarKelas();			$this->template->load('dashboard', 'v_asisten_dashboard', $data);
+			$data['daftar_kelas'] = $this->M_User->getDaftarKelas();			
+			$this->template->load('dashboard', 'v_asisten_dashboard', $data);
 		} else redirect(site_url('auth'));
 	}
 	public function getDataDokumentasi($iduser)
@@ -56,6 +57,10 @@ class C_Asisten extends CI_Controller {
 		$this->session->set_userdata('loaded_user_data_name', $data_user['username']);
 		$this->session->set_userdata('loaded_user_data_kelas', $kelas);
 		redirect(site_url('asisten'));
+	}
+	public function getPartisipasi($iduser) {
+		$data = $this->M_User->getPartisipasi($iduser);
+		echo json_encode($data);
 	}
 	
 }

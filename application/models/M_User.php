@@ -75,5 +75,11 @@ class M_User extends CI_Model {
             return $query->row_array();
         }
     }
-
+    function getPartisipasi($iduser) {
+        $sql = 'select nrp, count(*) as partisipasi from dokumentasi where user_iduser = '.$iduser.' group by nrp';
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else return false;
+    }
 }

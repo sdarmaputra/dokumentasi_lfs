@@ -26,7 +26,7 @@
     <h2>Menampilkan Data Kelompok <?php echo strtoupper($this->session->userdata('loaded_user_data_name')); ?></h2>
 <?php } ?>
     
-
+<h3>Partisipasi anggota: <span id="partisipasi_container_top"></span></h3>
 <div id="dokumentasi">
     <table id="tabel_dokumentasi" class="ui selectable celled table">
         <thead>
@@ -44,6 +44,7 @@
         </tbody>
     </table>    
 </div>
+<h3>Partisipasi anggota: <span id="partisipasi_container_bottom"></span></h3>
 
 <div id="anggota_tim" class="hidden-element">
     <table id="tabel_anggota_tim" class="ui selectable celled table">
@@ -117,6 +118,16 @@
           for (i = 0; i < mahasiswa.length; i++) {
             $('#tabel_anggota_tim > tbody:last-child').append('<tr><td>' + ( i + 1 ) + '</td><td>' + mahasiswa[i].nrp + '</td><td>' + mahasiswa[i].nama + '</td><td><a class="ui disabled icon button" title="Hapus Anggota" href="<?php echo site_url("user/deleteDataMahasiswa/'+mahasiswa[i].nrp+'"); ?>"><i class="ui trash icon"></i></a></td></tr>');  
           }
+        });
+
+        var innerHtml = '';
+        $.get( "<?php echo site_url('asisten/getPartisipasi'); ?>/" + user, function( data ) {
+          var partisipasi = $.parseJSON(data);
+          for (i = 0; i < partisipasi.length; i++) {
+            innerHtml = innerHtml + '<div class="ui blue image label">' + partisipasi[i].nrp + '<div class="detail">' + partisipasi[i].partisipasi + '</div></div>';
+          }
+          $('#partisipasi_container_top').html(innerHtml);
+          $('#partisipasi_container_bottom').html(innerHtml);
         });
     }
 

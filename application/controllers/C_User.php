@@ -86,4 +86,8 @@ class C_User extends CI_Controller {
 		$this->M_User->deleteDataMahasiswa($id);
 		redirect(site_url('user?page=anggota_tim'));
 	}
+	public function getPartisipasi($iduser) {
+		$data = $this->M_User->getPartisipasi($iduser);
+		echo json_encode($data);
+	}
 }

@@ -1,3 +1,4 @@
+<h3>Partisipasi anggota: <span id="partisipasi_container_top"></span></h3>
 <div id="dokumentasi">
     <table id="tabel_dokumentasi" class="ui selectable celled table">
         <thead>
@@ -62,6 +63,7 @@
 
         
 </div>
+<h3>Partisipasi anggota: <span id="partisipasi_container_bottom"></span></h3>
 
 <div id="anggota_tim" class="hidden-element">
     <table id="tabel_anggota_tim" class="ui selectable celled table">
@@ -130,6 +132,17 @@
           }
           
         });
+
+        var innerHtml = '';
+        $.get( "<?php echo site_url('user/getPartisipasi/'.$this->session->userdata('iduser')); ?>", function( data ) {
+          var partisipasi = $.parseJSON(data);
+          for (i = 0; i < partisipasi.length; i++) {
+            innerHtml = innerHtml + '<div class="ui blue image label">' + partisipasi[i].nrp + '<div class="detail">' + partisipasi[i].partisipasi + '</div></div>';
+          }
+          $('#partisipasi_container_top').html(innerHtml);
+          $('#partisipasi_container_bottom').html(innerHtml);
+        });
+
         $('select.dropdown').dropdown();        
 
         <?php 
