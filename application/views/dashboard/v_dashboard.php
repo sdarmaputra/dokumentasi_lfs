@@ -129,7 +129,6 @@
              .text(mahasiswa[i].nama)); 
           }
           
-          console.log(mahasiswa[0].nama);
         });
         $('select.dropdown').dropdown();        
 

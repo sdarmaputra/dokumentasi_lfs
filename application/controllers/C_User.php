@@ -9,6 +9,15 @@ class C_User extends CI_Controller {
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->model('M_User');
+        if (!empty($this->session->userdata('iduser'))) { 
+        	$role = explode('_', $this->session->userdata('kelas'));
+        	if ($role[0]  == 'special') {
+        		redirect(site_url($role[1]));	
+        	}
+        }
+        else if (empty($this->session->userdata('iduser'))) {
+        	redirect(site_url('auth'));
+        }
     }
     
 	public function index()
