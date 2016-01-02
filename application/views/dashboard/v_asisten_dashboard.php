@@ -13,7 +13,7 @@
         <div class="column field">
             <label>&nbsp;</label>
             <button class="ui teal vertical animated medium button" tabindex="0">
-                <div class="hidden content"><i class="plus icon"></i></div>
+                <div class="hidden content"><i class="unhide icon"></i></div>
                     <div class="visible content">
                     Tampilkan Data User
                 </div>
@@ -107,7 +107,7 @@
                 { "data": "judul" },
                 { "data": "nrp" },
                 { "data": "keterangan" },
-                { "data": null, "defaultContent": '<button class="ui red icon button" title="Hapus Dokumentasi"><i class="ui trash icon"></i></button>' }
+                { "data": null, "defaultContent": '<button class="ui disabled icon button" title="Hapus Dokumentasi"><i class="ui trash icon"></i></button>' }
             ]
         });
 
@@ -115,7 +115,7 @@
         $.get( "<?php echo site_url('asisten/getDataMahasiswa'); ?>/" + user, function( data ) {
           var mahasiswa = $.parseJSON(data);
           for (i = 0; i < mahasiswa.length; i++) {
-            $('#tabel_anggota_tim > tbody:last-child').append('<tr><td>' + ( i + 1 ) + '</td><td>' + mahasiswa[i].nrp + '</td><td>' + mahasiswa[i].nama + '</td><td><a class="ui red icon button" title="Hapus Anggota" href="<?php echo site_url("user/deleteDataMahasiswa/'+mahasiswa[i].nrp+'"); ?>"><i class="ui trash icon"></i></a></td></tr>');  
+            $('#tabel_anggota_tim > tbody:last-child').append('<tr><td>' + ( i + 1 ) + '</td><td>' + mahasiswa[i].nrp + '</td><td>' + mahasiswa[i].nama + '</td><td><a class="ui disabled icon button" title="Hapus Anggota" href="<?php echo site_url("user/deleteDataMahasiswa/'+mahasiswa[i].nrp+'"); ?>"><i class="ui trash icon"></i></a></td></tr>');  
           }
         });
     }
@@ -127,7 +127,7 @@
 
         <?php if ($daftar_kelas) {
             foreach ($daftar_kelas as $rw) { 
-                if (strcmp($rw['kelas'], 'special') == -1) {
+                if (strcmp($rw['kelas'], 'special') < 0) {
         ?>
             $('#daftar_kelas')
                  .append($("<option></option>")
