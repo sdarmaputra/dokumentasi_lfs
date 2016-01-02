@@ -28,8 +28,7 @@ class C_Asisten extends CI_Controller {
 		if(!empty($this->session->userdata('iduser')))
 		{
 			$data['need_table'] = TRUE;
-			$data['daftar_kelas'] = $this->M_User->getDaftarKelas();
-			$this->template->load('dashboard', 'v_asisten_dashboard', $data);
+			$data['daftar_kelas'] = $this->M_User->getDaftarKelas();			$this->template->load('dashboard', 'v_asisten_dashboard', $data);
 		} else redirect(site_url('auth'));
 	}
 	public function getDataDokumentasi($iduser)
