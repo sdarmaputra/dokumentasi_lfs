@@ -1,5 +1,5 @@
-<h3>Partisipasi anggota: <span id="partisipasi_container_top"></span></h3>
 <div id="dokumentasi">
+    <h3>Partisipasi anggota: <span id="partisipasi_container_top"></span></h3>
     <table id="tabel_dokumentasi" class="ui selectable celled table">
         <thead>
             <tr>
@@ -63,9 +63,10 @@
 
         
 </div>
-<h3>Partisipasi anggota: <span id="partisipasi_container_bottom"></span></h3>
+
 
 <div id="anggota_tim" class="hidden-element">
+<h3>Partisipasi anggota: <span id="partisipasi_container_bottom"></span></h3>
     <table id="tabel_anggota_tim" class="ui selectable celled table">
         <thead>
             <tr>
